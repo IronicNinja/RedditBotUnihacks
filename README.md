@@ -14,3 +14,10 @@ main.py - Main driver file with all of our functions
 config.py - Configures environmental variables
 
 tickers.py - List of tickers
+
+# Future Work
+* Look into more subreddits
+
+* Incorporate comments
+
+* Add other dimensions (news, tweets, etc.)
