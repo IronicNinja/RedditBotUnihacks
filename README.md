@@ -1,4 +1,4 @@
-# Wall Street Hacks Team Submission
+# Wall Street Hacks Reddit Bot
 Unihacks 2021 Submission Repository
 
 # CSV Files
