@@ -33,11 +33,11 @@ start_time = time.perf_counter()
 ### INITIALIZE AND GATHER DATA
 
 reddit = praw.Reddit(
-    client_id="gMQhHTjivbo8gQ",
-    client_secret="Wkai0BrDrcHtCdy4t_maPdl1agW6yA",
+    client_id=config.CLIENT_ID,
+    client_secret=config.CLIENT_SECRET,
     password=config.PASSWORD,
     user_agent="Stock Extraction",
-    username="clcironic"
+    username=config.USERNAME
 )
 
 subreddit = reddit.subreddit('wallstreetbets')
@@ -105,6 +105,7 @@ df['Polarity'] = df['Upvote Polarity']*df['Overall Sentiment']
 df.to_csv("all_data.csv")
 
 ### EMOJI EXTRACTION
+
 def extract_emojis(s):
     s = str(s)
     emojis = ''
@@ -114,6 +115,7 @@ def extract_emojis(s):
     return emojis
 
 ### WORD EXTRACTION
+
 stop_words = set(stopwords.words('english'))
 table = str.maketrans('', '', string.punctuation)
 lemmatizer = WordNetLemmatizer()
@@ -164,7 +166,8 @@ for i in df.index:
                 importance_dict[word] = importance
                 polarity_dict[word] = polarity
 
-### NORMALIZE
+### NORMALIZE DATA
+
 for word in counter_dict:
     importance_dict[word] /= counter_dict[word]
     polarity_dict[word] /= counter_dict[word]
@@ -177,9 +180,9 @@ def sort_dict(tmp_dict):
     return sorted_dict
 
 ### RETURN DATA ON TICKERS
+
 ticker_labels = []
 ticker_data = []
-#tickers_list = {t.lower() for t in tickers.TICKERS_LIST}
 for ticker in tickers.TICKERS_LIST:
     try:
         ticker_data.append([counter_dict[ticker], importance_dict[ticker], polarity_dict[ticker]])
